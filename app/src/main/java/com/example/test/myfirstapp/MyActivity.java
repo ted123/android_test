@@ -10,9 +10,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MyActivity extends AppCompatActivity {
-
+    DatabaseHelper myDb;
     public final static String EXTRA_MESSAGE = "com.example.test.myfirstapp.MESSAGE";
 
     @Override
@@ -30,6 +31,9 @@ public class MyActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        // for db
+        myDb = new DatabaseHelper(this);
     }
 
     @Override
@@ -56,10 +60,23 @@ public class MyActivity extends AppCompatActivity {
 
     /** Called when the user clicks the Send button **/
     public void sendMessage( View view ) {
-        Intent intent = new Intent( this, DisplayMessageActivity.class );
-        EditText editText = (EditText) findViewById(R.id.edit_message);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
+
+        Intent intent     = new Intent( this, DisplayMessageActivity.class );
+        EditText name     = ( EditText ) findViewById( R.id.name );
+        EditText surname  = ( EditText ) findViewById( R.id.surname );
+        EditText mark     = ( EditText ) findViewById( R.id.mark );
+        String nameStr    = name.getText().toString();
+        String surnameStr = name.getText().toString();
+        String markStr    = name.getText().toString();
+
+        boolean isInserted = myDb.insertData( nameStr, surnameStr, markStr );
+
+        if ( isInserted ) {
+            Toast.makeText( this, "Data inserted successfully", Toast.LENGTH_LONG ).show();
+            startActivity(intent);
+        } else{
+            Toast.makeText(this, "Data not inserted", Toast.LENGTH_LONG).show();
+        }
+
     }
 }

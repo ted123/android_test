@@ -4,15 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_my">
 
-    <EditText android:id="@+id/edit_message"
-        android:layout_width="0dp"
+    <EditText android:id="@+id/name"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:hint="@string/edit_message"/>
+        android:hint="@string/name"/>
+
+    <EditText android:id="@+id/surname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/surname"/>
+
+    <EditText android:id="@+id/mark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/mark"/>
 
     <Button
         android:layout_width="wrap_content"
