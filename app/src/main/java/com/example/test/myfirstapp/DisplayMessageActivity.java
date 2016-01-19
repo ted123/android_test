@@ -1,5 +1,6 @@
 package com.example.test.myfirstapp;
 
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -36,14 +37,21 @@ public class DisplayMessageActivity extends AppCompatActivity {
         }
 
         // for ui
-        Intent intent = getIntent();
+//        Intent intent = getIntent();
+//
+//        TextView textView = new TextView(this);
+//        textView.setTextSize(12);
+//        textView.setText(buffer);
+//
+//        RelativeLayout layout = (RelativeLayout) findViewById(R.id.content);
+//        layout.addView(textView);
+        Resources reso = getResources();
 
-        TextView textView = new TextView(this);
-        textView.setTextSize(12);
-        textView.setText(buffer);
-
-        RelativeLayout layout = (RelativeLayout) findViewById(R.id.content);
-        layout.addView(textView);
+        final PieChart pie = (PieChart) this.findViewById(R.id.Pie);
+        pie.addItem("Transportation", 6, reso.getColor(R.color.seafoam));
+        pie.addItem("Food", 4, reso.getColor(R.color.chartreuse));
+        pie.addItem("Electric Bill", 3, reso.getColor(R.color.emerald));
+        pie.addItem("Water Bill", 2, reso.getColor(R.color.bluegrass));
     }
 
 }
