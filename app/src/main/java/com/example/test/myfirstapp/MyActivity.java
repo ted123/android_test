@@ -1,10 +1,13 @@
 package com.example.test.myfirstapp;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +17,7 @@ import android.widget.Toast;
 
 public class MyActivity extends AppCompatActivity {
     DatabaseHelper myDb;
+
     public final static String EXTRA_MESSAGE = "com.example.test.myfirstapp.MESSAGE";
 
     @Override
@@ -69,7 +73,7 @@ public class MyActivity extends AppCompatActivity {
         String surnameStr = name.getText().toString();
         String markStr    = name.getText().toString();
 
-        boolean isInserted = myDb.insertData( nameStr, surnameStr, markStr );
+        boolean isInserted = myDb.insertData(nameStr, surnameStr, markStr);
 
         if ( isInserted ) {
             Toast.makeText( this, "Data inserted successfully", Toast.LENGTH_LONG ).show();
@@ -78,5 +82,16 @@ public class MyActivity extends AppCompatActivity {
             Toast.makeText(this, "Data not inserted", Toast.LENGTH_LONG).show();
         }
 
+    }
+
+    public void killApps( View view ) {
+        Context contexts = view.getContext();
+        ActivityManager am = (ActivityManager) contexts.getSystemService(Context.ACTIVITY_SERVICE);
+//
+        for (ActivityManager.RunningAppProcessInfo pid : am.getRunningAppProcesses()) {
+            Log.i("Process", ""+pid.processName);
+            //if( !(pid.processName + "").contains("com.example.test.myfirstapp") ){}
+           am.killBackgroundProcesses(pid.processName);
+        }
     }
 }
